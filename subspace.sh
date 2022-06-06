@@ -18,8 +18,8 @@ sleep 1 && curl -s https://api.nodes.guru/logo.sh | bash && sleep 1
 
 cd $HOME
 rm -rf subspace*
-wget -O subspace-node https://github.com/subspace/subspace/releases/download/gemini-1b-2022-june-03/subspace-node-ubuntu-x86_64-gemini-1b-2022-june-03 
-wget -O subspace-farmer https://github.com/subspace/subspace/releases/download/gemini-1b-2022-june-03/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-june-03
+wget -O subspace-node https://github.com/subspace/subspace/releases/download/gemini-1b-2022-june-05/subspace-node-ubuntu-x86_64-gemini-1b-2022-june-05
+wget -O subspace-farmer https://github.com/subspace/subspace/releases/download/gemini-1b-2022-june-05/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-june-05
 chmod +x subspace*
 mv subspace* /usr/local/bin/
 
@@ -36,7 +36,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which subspace-node) --chain gemini-1 --execution wasm --keep-blocks 1024 --pruning archive --validator --name $SUBSPACE_NODENAME --in-peers 15 --out-peers 15
+ExecStart=$(which subspace-node) --chain gemini-1 --execution wasm --keep-blocks 1024 --pruning 1024 --validator --name $SUBSPACE_NODENAME
 Restart=on-failure
 LimitNOFILE=65535
 
@@ -51,7 +51,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which subspace-farmer) farm --reward-address $SUBSPACE_WALLET --plot-size 60G
+ExecStart=$(which subspace-farmer) farm --reward-address $SUBSPACE_WALLET --plot-size 40G
 Restart=on-failure
 LimitNOFILE=65535
 
