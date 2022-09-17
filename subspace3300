@@ -38,6 +38,7 @@ User=$USER
 Type=simple
 ExecStart=/usr/local/bin/subspace-node --chain gemini-2a --execution wasm --state-pruning archive --validator --name $SUBSPACE_NODENAME
 Restart=on-failure
+RestartSec=5s
 LimitNOFILE=65535
 
 [Install]
@@ -51,8 +52,9 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=/usr/local/bin/subspace-farmer farm --reward-address $SUBSPACE_WALLET --plot-size 3300G
+ExecStart=/usr/local/bin/subspace-farmer --base-path /mnt/nvme2/subspace/farmer farm --reward-address $SUBSPACE_WALLET --plot-size 3300G
 Restart=on-failure
+RestartSec=5s
 LimitNOFILE=65535
 
 [Install]
